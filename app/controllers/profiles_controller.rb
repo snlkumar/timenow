@@ -1,6 +1,10 @@
 class ProfilesController < ApplicationController
   def show
-    @user = User.where(:name => request.subdomain).first || not_found
+    unless current_user
+    redirect_to "#{request.url}users/sign_in"
+    else
+      @user = User.where(:name => request.subdomain).first || not_found
+    end
   end
   
   def not_found

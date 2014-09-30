@@ -18,7 +18,8 @@ class User
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
-
+  field :subdomain, :type=>String
+  
   ## Rememberable
   field :remember_created_at, :type => Time
 
@@ -49,6 +50,6 @@ class User
   validates_format_of :name, with: /^[a-z0-9_]+$/, message: 'must be lowercase alphanumerics only'
   validates_length_of :name, maximum: 32, message: 'exceeds maximum of 32 characters'
   validates_exclusion_of :name, in: ['www', 'mail', 'ftp'], message: 'is not available'
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
   
-attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 end
