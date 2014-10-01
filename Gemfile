@@ -9,6 +9,7 @@ group :assets do
 end
 gem 'jquery-rails'
 # gem "mongoid", ">= 3.1.2"
+gem 'bootstrap-sass', '2.3.2.0'
 gem 'sqlite3'
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
 gem "database_cleaner", ">= 1.0.0.RC1", :group => :test

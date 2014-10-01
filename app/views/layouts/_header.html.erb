@@ -1,10 +1,11 @@
-
-
-<ul class="nav navbar-nav">
-	
-	<li>
-    <%= link_to 'Create new Manager', "/users/sign_in" unless current_user%>
-  </li>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      
+     
+      	
+      	<%= link_to "Rails3 Subdomains", root_path, :class => 'brand' %>
+<ul class="nav">
   <li>
     <%= link_to 'Main', root_url %>
   </li>
@@ -32,3 +33,11 @@
     <% end %>
   <% end %>
 </ul>
+
+      	
+      	
+        
+      </nav>
+    </div>
+  </div>
+</header>

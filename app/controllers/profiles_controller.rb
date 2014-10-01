@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
   def show
+    
+    puts "i am in show with the following current user#{current_user}"
     unless current_user
     redirect_to "#{request.url}users/sign_in"
     else
