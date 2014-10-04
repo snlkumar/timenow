@@ -7,5 +7,6 @@ Rails3Subdomains::Application.routes.draw do
   constraints(Subdomain) do
     match '/' => 'profiles#show'
    end
+   match '/pricing'=>'home#detail_and_pricing'
   root :to => "home#index"
 end

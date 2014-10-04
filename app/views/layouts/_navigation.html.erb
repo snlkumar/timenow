@@ -3,7 +3,8 @@
 <ul class="nav navbar-nav">
 	
 	<li>
-    <%= link_to 'Create new Manager', "/users/sign_in" unless current_user%>
+    <% link_to 'Create new Manager', "/users/sign_in" unless current_user%>
+    <%= link_to 'Pricing', "/pricing" %>
   </li>
   <li>
     <%= link_to 'Main', root_url %>
