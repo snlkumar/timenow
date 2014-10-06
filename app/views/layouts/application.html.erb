@@ -31,10 +31,11 @@
     <!-- Load SCRIPT.JS which will create datepicker for input field  -->
     
     <%= csrf_meta_tags %>
-    <%= render 'layouts/shim' %>
+    <%= yield(:head) %>
+    <% render 'layouts/shim' %>
    
   </head>
-  <body>    
+  <body class="<%= controller_name %> <%= action_name %>">    
        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->

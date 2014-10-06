@@ -9,6 +9,8 @@
 #
 GMAIL_USERNAME: Your_Username
 GMAIL_PASSWORD: Your_Password
+STRIPE_API_KEY: sk_test_tAFkewskRmAqNjiIF4WZRVOG
+STRIPE_PUBLIC_KEY: pk_test_OI0JTbtFkVDtaZJvTbyhb6lg
 ADMIN_NAME: user1
 ADMIN_EMAIL: user@example.com
 ADMIN_PASSWORD: changeme

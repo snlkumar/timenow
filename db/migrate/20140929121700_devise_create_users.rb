@@ -20,6 +20,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :last_sign_in_ip
       t.references :manager
       t.references :employe
+      t.string :customer_id
+      t.string :last_4_digits
 
       ## Confirmable
       # t.string   :confirmation_token
