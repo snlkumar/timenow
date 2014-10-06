@@ -5,11 +5,12 @@
 
 <script type="text/javascript">
 	// This identifies your website in the createToken call below
-	Stripe.setPublishableKey('YOUR_PUBLISHABLE_KEY');
+	Stripe.setPublishableKey('pk_test_OI0JTbtFkVDtaZJvTbyhb6lg');
 
 	var stripeResponseHandler = function(status, response) {
-		var $form = $('#payment-form');
-
+		var $form = $('#card_form');
+        
+        
 		if (response.error) {
 			// Show the errors on the form
 			$form.find('.payment-errors').text(response.error.message);
@@ -17,44 +18,62 @@
 		} else {
 			// token contains id, last4, and card type
 			var token = response.id;
+			alert(token)
+			alert("success")
 			// Insert the token into the form so it gets submitted to the server
-			$form.append($('<input type="hidden" name="stripeToken" />').val(token));
+			$("#manager_user_attributes_stripe_token").val(token);
 			// and re-submit
-			$form.get(0).submit();
+			document.getElementById("card_form").submit();
+			
 		}
 	};
 
-	jQuery(function($) {
-		$('#payment-form').submit(function(e) {
-			var card;
-          card = {
-            name: $('#user_name').val(),
+$(document).on("click","#manager_register",function(e){
+	e.preventDefault();
+	card = {
+            name: $('#manager_user_attributes_name').val(),
             number: $('#card_number').val(),
-            cvc: $('#card_code').val(),
-            expMonth: $('#card_month').val(),
-            expYear: $('#card_year').val()
+            cvc: $('#code').val(),
+            expMonth: $('#month').val(),
+            expYear: $('#year').val()
           };
-			
-			
-			
-			
-			
-			var $form = $(this);
-
-			// Disable the submit button to prevent repeated clicks
-			$form.find('button').prop('disabled', true);
-
-			Stripe.card.createToken($form, stripeResponseHandler);
-
-			// Prevent the form from submitting with the default action
-			return false;
-		});
-	}); 
+	Stripe.card.createToken(card, stripeResponseHandler);
+})
+	// $(document).ready(function(){ 
+// 		   
+		// $('#card_form').submit(function(e) {
+			// e.preventDefault();
+			// alert("jhjbh")
+			// return false
+			// var card;
+          // card = {
+            // name: $('#user_name').val(),
+            // number: $('#card_number').val(),
+            // cvc: $('#card_code').val(),
+            // expMonth: $('#card_month').val(),
+            // expYear: $('#card_year').val()
+          // };
+// 			
+// 			
+// 			
+// 			
+// 			
+			// var $form = $(this);
+// 
+			// // Disable the submit button to prevent repeated clicks
+			// $form.find('button').prop('disabled', true);
+// 
+			// Stripe.card.createToken($form, stripeResponseHandler);
+// 
+			// // Prevent the form from submitting with the default action
+			// return false;
+		// });
+	// }); 
 </script>
 
 <h2>Sign up</h2>
 <div id="stripe_error" class="alert alert-error" style="display:none" ></div>
-<%= form_for @manager,:html=>{:class=>"card_form"} do |f| %>
+<%= form_for @manager,:html=>{:id=>"card_form"} do |f| %>
 <div class="clr"></div>
 <% if @manager.errors.any? %>
 <ul class="alert fade in alert-error">
@@ -110,22 +129,22 @@
 
 						<div class="form-row">
 							<label> <span>Card Number</span>
-								<input type="text" size="20" data-stripe="number"/>
+								<input type="text" size="20" data-stripe="number" id="card_number"/>
 							</label>
 						</div>
 
 						<div class="form-row">
 							<label> <span>CVC</span>
-								<input type="text" size="4" data-stripe="cvc"/>
+								<input type="text" size="4" data-stripe="cvc" id="code"/>
 							</label>
 						</div>
 
 						<div class="form-row">
 							<label> <span>Expiration (MM/YYYY)</span>
-								<input type="text" size="2" data-stripe="exp-month"/>
+								<input type="text" size="2" data-stripe="exp-month" id="month"/>
 							</label>
 							<span> / </span>
-							<input type="text" size="4" data-stripe="exp-year"/>
+							<input type="text" size="4" data-stripe="exp-year" id="year"/>
 						</div>
 					</form>
 					
@@ -191,7 +210,7 @@
 				<b>By clicking create my account, you are agree to the terms of service and privacy policy</b>
 				<br/>
 
-				<button type="submit" class="btn btn-primary">
+				<button type="button" class="btn btn-primary" id="manager_register">
 					Sign up
 				</button>
 				<!-- <button type="button" class="btn btn-primary">Create Account</button> -->
