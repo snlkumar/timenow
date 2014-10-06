@@ -1,20 +1,11 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-<p><%= f.label :name %><br />
-<%= f.text_field :name %></p>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
+<%= form_for(@manager) do |f| %>
+<div class="clr"></div>
+<% if @manager.errors.any? %>
+<ul class="alert fade in alert-error">
+<% @manager.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
 <% end %>
 
 <div>
@@ -30,18 +21,20 @@
                             <input type="text" class="form-control"  placeholder="First Name">
                               <input type="text" class="form-control"  placeholder="Last Name">
                           </div>
-                          
+                          <%= f.fields_for :user do |u| %>
                           <div class="form-group">
                             <div class="input-group">
                               <div class="input-group-addon">@</div>
-                              <input class="form-control" type="email" placeholder="Enter email">
+                              <%= u.email_field :email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>                              
                             </div>
                           </div><br/>
                           <div class="form-group">
+                            <%= u.password_field :password, :required => true,:class=>"form-control",:placeholder=>"Password" %>
+                            <%= u.password_field :password_confirmation,:class=>"form-control", :required => true,:placeholder=>" Confirm Password" %>
                             
-                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
+                              
                           </div>
+                          <%end%>
                           <div class="form-group">
                             
                             <label class="radio-inline">
@@ -110,4 +103,26 @@
 	</div>
 </div>
 
-<%= render "devise/shared/links" %>
+
+
+
+<!-- <%= f.fields_for :user do |u| %>
+<div class="change_password_fields">
+<div class="change_password_names"><%=u.label :email%></div>
+<div class="change_password_form-field"><%= u.email_field :email, :required => true, :autofocus => true,:class=>"text_class" %></div>
+<div class="clr"></div>
+</div>
+<div class="change_password_fields">
+<div class="change_password_names"><%=u.label :password%></div>
+<div class="change_password_form-field"><%= u.password_field :password, :required => true %></div>
+<div class="clr"></div>
+</div>
+<div class="change_password_fields">
+<div class="change_password_names"><%=u.label :password_confirmation,"Confirm Password"%></div>
+<div class="change_password_form-field"><%= u.password_field :password_confirmation, :required => true %></div>
+<div class="clr"></div>
+</div>
+<% end %> -->
+
+
+<%end%>

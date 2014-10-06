@@ -11,6 +11,9 @@ gem 'jquery-rails'
 # gem "mongoid", ">= 3.1.2"
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sqlite3'
+gem 'mysql2'
+gem "stripe", ">= 1.7.11"
+gem "stripe_event", ">= 0.4.0"
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
 gem "database_cleaner", ">= 1.0.0.RC1", :group => :test
 # gem "mongoid-rspec", ">= 1.7.0", :group => :test
