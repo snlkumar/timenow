@@ -1,0 +1,243 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<!-- jQuery is used only for this example; it isn't required to use Stripe -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	// This identifies your website in the createToken call below
+	Stripe.setPublishableKey('pk_test_OI0JTbtFkVDtaZJvTbyhb6lg');
+
+	var stripeResponseHandler = function(status, response) {
+		var $form = $('#card_form');
+        
+        
+		if (response.error) {
+			// Show the errors on the form
+			$form.find('.payment-errors').text(response.error.message);
+			$form.find('button').prop('disabled', false);
+		} else {
+			// token contains id, last4, and card type
+			var token = response.id;
+			alert(token)
+			alert("success")
+			// Insert the token into the form so it gets submitted to the server
+			$("#manager_user_attributes_stripe_token").val(token);
+			// and re-submit
+			document.getElementById("card_form").submit();
+			
+		}
+	};
+
+$(document).on("click","#manager_register",function(e){
+	e.preventDefault();
+	card = {
+            name: $('#manager_user_attributes_name').val(),
+            number: $('#card_number').val(),
+            cvc: $('#code').val(),
+            expMonth: $('#month').val(),
+            expYear: $('#year').val()
+          };
+	Stripe.card.createToken(card, stripeResponseHandler);
+})
+	// $(document).ready(function(){ 
+// 		   
+		// $('#card_form').submit(function(e) {
+			// e.preventDefault();
+			// alert("jhjbh")
+			// return false
+			// var card;
+          // card = {
+            // name: $('#user_name').val(),
+            // number: $('#card_number').val(),
+            // cvc: $('#card_code').val(),
+            // expMonth: $('#card_month').val(),
+            // expYear: $('#card_year').val()
+          // };
+// 			
+// 			
+// 			
+// 			
+// 			
+			// var $form = $(this);
+// 
+			// // Disable the submit button to prevent repeated clicks
+			// $form.find('button').prop('disabled', true);
+// 
+			// Stripe.card.createToken($form, stripeResponseHandler);
+// 
+			// // Prevent the form from submitting with the default action
+			// return false;
+		// });
+	// }); 
+</script>
+
+<h2>Sign up</h2>
+<div id="stripe_error" class="alert alert-error" style="display:none" ></div>
+<%= form_for @manager,:html=>{:id=>"card_form"} do |f| %>
+<div class="clr"></div>
+<% if @manager.errors.any? %>
+<ul class="alert fade in alert-error">
+	<% @manager.errors.full_messages.each do |msg| %>
+	<li>
+		<%= msg %>
+	</li>
+	<% end %>
+</ul>
+<% end %>
+
+<div>
+	<div class="container">
+
+		<div class="containHolder">
+			<div class="row">
+				<div class="col-md-12">
+					<div>
+						<h4>Step 1: Your Information</h4>
+						<form class="form-inline" role="form">
+							<div class="form-group">
+								<!-- <input type="text" class="form-control"  placeholder="First Name">
+								<input type="text" class="form-control"  placeholder="Last Name"> -->
+							</div>
+
+							<%= f.fields_for :user do |u| %>
+							<%= u.hidden_field :stripe_token %>
+							<div class="form-group">
+								<div class="input-group">
+
+									<%= u.text_field :name, :required => true, :placeholder=>"Enter name",:class=>"form-control" %>
+								</div>
+							</div>
+							<br/>
+							<div class="form-group">
+
+								<%= u.email_field :email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>
+							</div>
+					</div>
+					<div class="form-group">
+						<%= u.password_field :password, :required => true,:class=>"form-control",:placeholder=>"Password" %>
+						<%= u.password_field :password_confirmation,:class=>"form-control", :required => true,:placeholder=>" Confirm Password" %>
+
+					</div>
+					<% if @user.stripe_token %>
+					<p>
+						Credit card acceptance is pending.
+					</p>
+					<% else %>
+
+					<form action="" method="POST" id="payment-form">
+						<span class="payment-errors"></span>
+
+						<div class="form-row">
+							<label> <span>Card Number</span>
+								<input type="text" size="20" data-stripe="number" id="card_number"/>
+							</label>
+						</div>
+
+						<div class="form-row">
+							<label> <span>CVC</span>
+								<input type="text" size="4" data-stripe="cvc" id="code"/>
+							</label>
+						</div>
+
+						<div class="form-row">
+							<label> <span>Expiration (MM/YYYY)</span>
+								<input type="text" size="2" data-stripe="exp-month" id="month"/>
+							</label>
+							<span> / </span>
+							<input type="text" size="4" data-stripe="exp-year" id="year"/>
+						</div>
+					</form>
+					
+
+					<% end %>
+					<%end%>
+					<div class="form-group">
+
+						<label class="radio-inline">
+							<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+							Male </label>
+						<label class="radio-inline">
+							<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+							Female </label>
+					</div>
+					</form>
+				</div>
+				<div>
+					<h4>Step 2: Company Information</h4>
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<input type="text" class="form-control"  placeholder="Company">
+							<input type="email" class="form-control"  placeholder="Email">
+						</div>
+
+						<br/>
+						<div class="form-group">
+
+							<input type="tel" class="form-control" id="exampleInputPassword2" placeholder="Phone">
+							<input type="text" class="form-control" id="exampleInputPassword2" placeholder="Login Url">
+						</div>
+						<br/>
+						<b>**Every account has its own url. This is where you and your employee go to log in</b>
+					</form>
+				</div>
+				<div>
+					<h4>Step 3: Payment Confirmation</h4>
+					<div>
+
+						<label class="radio-inline">
+							<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+							One Time Payment </label>
+						<label class="radio-inline">
+							<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+							Monthly Recuring Payment </label>
+
+					</div>
+
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<input type="text" class="form-control"  placeholder="Credit Card Number">
+							<input type="email" class="form-control"  placeholder="CVV Number">
+						</div>
+						<br/>
+						<div class="form-group">
+							<input type="text" class="form-control"  placeholder="Expairy Date" id="datepicker" />
+						</div>
+
+					</form>
+
+				</div>
+				<br/>
+				<b>By clicking create my account, you are agree to the terms of service and privacy policy</b>
+				<br/>
+
+				<button type="button" class="btn btn-primary" id="manager_register">
+					Sign up
+				</button>
+				<!-- <button type="button" class="btn btn-primary">Create Account</button> -->
+			</div>
+
+		</div>
+
+	</div>
+</div>
+</div>
+
+<!-- <%= f.fields_for :user do |u| %>
+<div class="change_password_fields">
+<div class="change_password_names"><%=u.label :email%></div>
+<div class="change_password_form-field"><%= u.email_field :email, :required => true, :autofocus => true,:class=>"text_class" %></div>
+<div class="clr"></div>
+</div>
+<div class="change_password_fields">
+<div class="change_password_names"><%=u.label :password%></div>
+<div class="change_password_form-field"><%= u.password_field :password, :required => true %></div>
+<div class="clr"></div>
+</div>
+<div class="change_password_fields">
+<div class="change_password_names"><%=u.label :password_confirmation,"Confirm Password"%></div>
+<div class="change_password_form-field"><%= u.password_field :password_confirmation, :required => true %></div>
+<div class="clr"></div>
+</div>
+<% end %> -->
+
+<%end%>

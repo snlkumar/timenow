@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(:version => 20141001053547) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "manager_id"
+    t.integer  "employe_id"
+    t.string   "customer_id"
+    t.string   "last_4_digits"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end

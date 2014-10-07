@@ -1,9 +1,10 @@
 class ProfilesController < ApplicationController
+  # before_filter :authenticate_user!
   def show
     
     puts "i am in show with the following current user#{current_user}"
     unless current_user
-    redirect_to "#{request.url}users/sign_in"
+     root_url(:host => request.domain)
     else
       @user = User.where(:name => request.subdomain).first || not_found
     end
