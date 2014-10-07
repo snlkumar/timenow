@@ -5,9 +5,7 @@ class User < ActiveRecord::Base
    belongs_to :manager
    belongs_to :employe
    validates_presence_of :email
-  validates_presence_of :encrypted_password
-  # belongs_to :manager
-  # belongs_to :employe
+  validates_presence_of :encrypted_password 
   validates_presence_of :name
   validates_format_of :name, with: /^[a-z0-9_]+$/, message: 'must be lowercase alphanumerics only'
   validates_length_of :name, maximum: 32, message: 'exceeds maximum of 32 characters'
