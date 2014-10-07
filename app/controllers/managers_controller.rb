@@ -10,6 +10,7 @@ class ManagersController < ApplicationController
     if @manager.save
     redirect_to root_path(:host=>request.domain)
     else
+      @user= @manager.build_user
       render "new"
     end
   end

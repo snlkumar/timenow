@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
+   belongs_to :manager
+   belongs_to :employe
    validates_presence_of :email
   validates_presence_of :encrypted_password
   # belongs_to :manager
@@ -14,7 +15,13 @@ class User < ActiveRecord::Base
   attr_accessible :name,:employe,:manager, :email,:subdomain, :password, :password_confirmation,:stripe_token, :coupon, :remember_me, :created_at, :updated_at
   attr_accessor :stripe_token, :coupon
   before_save :update_stripe
+  after_create :update_subdomain 
   before_destroy :cancel_subscription
+  
+  
+  def update_subdomain
+    User.update(self.id,:subdomain=>self.name) if self.manager
+  end
   
   def update_plan(role)
     self.role_ids = []
@@ -42,14 +49,14 @@ class User < ActiveRecord::Base
           :email => email,
           :description => name,
           :card => stripe_token,
-          :plan => roles.first.name
+          :plan => "silver"
         )
       else
         customer = Stripe::Customer.create(
           :email => email,
           :description => name,
           :card => stripe_token,
-          :plan => roles.first.name,
+          :plan => "Silver",
           :coupon => coupon
         )
       end

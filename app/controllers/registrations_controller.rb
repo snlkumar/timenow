@@ -1,7 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   
-  def new
-    puts "i am in new#{params}"
+  def new   
     super
   end
   
