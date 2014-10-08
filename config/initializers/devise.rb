@@ -6,9 +6,10 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
 
-  # Configure the class responsible to send e-mails.
-  # config.mailer = "Devise::Mailer"
 
+  # Configure the class responsible to send e-mails.
+   config.mailer = "Devise::Mailer"
+   ActionMailer::Base.default_url_options = { :host => 'lvh.me:3000' }
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
@@ -214,7 +215,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-
+ config.reconfirmable = false
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

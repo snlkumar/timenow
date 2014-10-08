@@ -1,6 +1,6 @@
 class ManagersController < ApplicationController
   def new
-    @manager=Manager.new
+   @manager=Manager.new
    @user= @manager.build_user
   end
   
