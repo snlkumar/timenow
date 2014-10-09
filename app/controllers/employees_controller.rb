@@ -16,4 +16,8 @@ class EmployeesController < ApplicationController
     end
   end
   
+  def shift
+    
+  end
+  
 end

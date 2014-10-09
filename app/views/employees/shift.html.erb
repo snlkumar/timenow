@@ -1,0 +1,109 @@
+<script type="text/javascript" src="../assets/jquery.timer.js"></script>
+<script type="text/javascript">
+	
+	$(document).on("click","#check_in",function(){
+		$("#stopwatch").stopwatch().stopwatch('start');
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(success, error);
+		} else {
+			alert("Not Supported!");
+		}
+
+		function success(position) {
+			var url="/shifts"
+			var type="POST"
+			var datatype="json"
+			var lati=position.coords.latitude
+			var longi=position.coords.longitude
+			var processData={
+				'shift[latitude]': lati,
+				'shift[longitude]': longi, 
+				
+			}			
+			$("#ip").html(lati);
+			$("#address").html(longi);
+			$.ajax({
+				url: url,
+				type: type,
+				dataType: datatype,
+				data: processData,
+				success: function(data){
+				alert("success")
+				},
+				error: function(e){
+					alert("fail")
+				}
+				
+			});
+			
+		}
+
+		function error(msg) {
+			$("#address").html( typeof msg == 'string' ? msg : "error");
+		}
+	});
+$(document).on("click","#check_out",function(){
+		$("#stopwatch").stopwatch().stopwatch('stop');
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(success, error);
+		} else {
+			alert("Not Supported!");
+		}
+
+		function success(position) {
+			var url="/shifts/"+
+			var type="PUT"
+			var datatype="json"
+			var lati=position.coords.latitude
+			var longi=position.coords.longitude
+			var processData={
+				'shift[latitude]': lati,
+				'shift[longitude]': longi, 
+				
+			}			
+			$("#ip").html(lati);
+			$("#address").html(longi);
+			$.ajax({
+				url: url,
+				type: type,
+				dataType: datatype,
+				data: processData,
+				success: function(data){
+				alert("success")
+				},
+				error: function(e){
+					alert("fail")
+				}
+				
+			});
+			
+		}
+
+		function error(msg) {
+			$("#address").html( typeof msg == 'string' ? msg : "error");
+		}
+	});
+</script>
+
+<div class="row">
+
+	<div class="col-xs-8" style="box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);margin-top: 15px;margin-left: 218px;padding: 29px;">
+		<div style="position:relative;float:right;font-size: 20px;">
+			<b><span id="stopwatch">00:00:00</span></b>
+		</div>
+		<p>
+			<input type='button' value='Check-in' id="check_in" class="btn btn-primary"/>
+			<input type='button' value='Check-out' class="btn btn-primary" onclick='stop();' />
+		</p>
+
+		<p>
+			<div id="ip">
+				Lat
+			</div>
+			<div id="address">
+				Long
+			</div>
+
+		</p>
+	</div>
+</div>

@@ -9,6 +9,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'jquery-rails'
+gem "geocoder"
+gem "timezone"
 # gem "mongoid", ">= 3.1.2"
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sqlite3'
