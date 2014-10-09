@@ -11,6 +11,7 @@ end
 gem 'jquery-rails'
 gem "geocoder"
 gem "timezone"
+gem "time_diff"
 # gem "mongoid", ">= 3.1.2"
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sqlite3'
