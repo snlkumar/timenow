@@ -13,6 +13,7 @@ gem "geocoder"
 gem "timezone"
 gem "time_diff"
 # gem "mongoid", ">= 3.1.2"
+gem 'twilio-ruby'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sqlite3'
 gem 'mysql2'
