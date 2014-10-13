@@ -2,6 +2,9 @@ class ShiftsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:create,:update]
   def new
     @shift=Shift.new
+    Timezone::Configure.begin do |c|
+      c.username = 'krishan_hiranwal123'
+    end
     timezone = Timezone::Zone.new :latlon => [30.733315,76.77941799999999]
     puts "i am in timezone#{timezone.zone}"
   end
