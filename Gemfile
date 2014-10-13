@@ -9,7 +9,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'jquery-rails'
-gem "geocoder"
+# gem "geocoder"
 gem "timezone"
 gem "time_diff"
 # gem "mongoid", ">= 3.1.2"
