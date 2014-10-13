@@ -20,7 +20,8 @@ Rails3Subdomains::Application.routes.draw do
    end
    match '/pricing'=>'home#detail_and_pricing'
   root :to => "home#index"
-  post 'twilios/incoming' => 'twilios#incoming'
+  get 'twilios/voice' => 'twilios#voice'
+  get 'twilios/incoming' => 'twilios#incoming'
   # resources :twilios do
     # collection do
       # post 'incoming'
