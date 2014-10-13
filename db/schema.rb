@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(:version => 20141009091257) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "employes", :force => true do |t|
-    t.integer  "manager_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "managers", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.string   "company_name"
+    t.string   "company_email"
+    t.string   "company_phone"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "shifts", :force => true do |t|
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20141009091257) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "manager_id"
-    t.integer  "employe_id"
+    t.integer  "employee_id"
     t.string   "customer_id"
     t.string   "last_4_digits"
     t.datetime "created_at",                             :null => false
