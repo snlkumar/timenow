@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
  
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,:confirmable
    belongs_to :manager
-   belongs_to :employe
+   belongs_to :employee
    validates_presence_of :email
   validates_presence_of :encrypted_password 
   validates_presence_of :name
@@ -12,13 +12,17 @@ class User < ActiveRecord::Base
   validates_exclusion_of :name, in: ['www', 'mail', 'ftp'], message: 'is not available'
   attr_accessible :name,:employe,:manager, :email,:subdomain, :password, :password_confirmation,:stripe_token, :coupon, :remember_me, :created_at, :updated_at
   attr_accessor :stripe_token, :coupon
-  before_save :update_stripe
+  before_save :update_stripe,:if => Proc.new {|model| model.manager }
   after_create :update_subdomain 
   before_destroy :cancel_subscription
   
   
   def update_subdomain
-    User.update(self.id,:subdomain=>self.name) if self.manager
+    if self.manager
+    User.update(self.id,:subdomain=>self.manager.company_name)
+    else
+      User.update(self.id,:subdomain=>self.employee.manager.user.subdomain)
+      end 
   end
   
   def update_plan(role)

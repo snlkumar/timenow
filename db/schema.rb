@@ -11,17 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141001053547) do
+ActiveRecord::Schema.define(:version => 20141009091257) do
 
-  create_table "employes", :force => true do |t|
+  create_table "employees", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.string   "emp_code"
+    t.string   "designation"
+    t.string   "phone"
     t.integer  "manager_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "managers", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.string   "company_name"
+    t.string   "company_email"
+    t.string   "company_phone"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "shifts", :force => true do |t|
+    t.integer  "employee_id"
+    t.float    "latitude"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "date"
+    t.string   "shift_hours"
+    t.string   "address"
+    t.float    "longitude"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -38,13 +63,18 @@ ActiveRecord::Schema.define(:version => 20141001053547) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "manager_id"
-    t.integer  "employe_id"
+    t.integer  "employee_id"
     t.string   "customer_id"
     t.string   "last_4_digits"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

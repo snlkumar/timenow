@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.13'
+# gem 'twilio-ruby'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'execjs'
@@ -8,7 +9,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'jquery-rails'
+gem "geocoder"
+gem "timezone"
+gem "time_diff"
 # gem "mongoid", ">= 3.1.2"
+gem 'twilio-ruby'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sqlite3'
 gem 'mysql2'

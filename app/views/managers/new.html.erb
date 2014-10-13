@@ -36,52 +36,11 @@
 		};
 		Stripe.card.createToken(card, stripeResponseHandler);
 	})
-	// $(document).ready(function(){
-	//
-	// $('#card_form').submit(function(e) {
-	// e.preventDefault();
-	// alert("jhjbh")
-	// return false
-	// var card;
-	// card = {
-	// name: $('#user_name').val(),
-	// number: $('#card_number').val(),
-	// cvc: $('#card_code').val(),
-	// expMonth: $('#card_month').val(),
-	// expYear: $('#card_year').val()
-	// };
-	//
-	//
-	//
-	//
-	//
-	// var $form = $(this);
-	//
-	// // Disable the submit button to prevent repeated clicks
-	// $form.find('button').prop('disabled', true);
-	//
-	// Stripe.card.createToken($form, stripeResponseHandler);
-	//
-	// // Prevent the form from submitting with the default action
-	// return false;
-	// });
-	// });
+	
 </script>
 
 <h2>Sign up</h2>
 <div id="stripe_error" class="alert alert-error" style="display:none" ></div>
-<%= form_for @manager,:html=>{:id=>"card_form"} do |f| %>
-<div class="clr"></div>
-<% if @manager.errors.any? %>
-<ul class="alert fade in alert-error">
-	<% @manager.errors.full_messages.each do |msg| %>
-	<li>
-		<%= msg %>
-	</li>
-	<% end %>
-</ul>
-<% end %>
-
 <div>
 	<div class="container">
 		<div class="containHolder">
@@ -89,61 +48,79 @@
 				<div class="col-md-12">
 					<div>
 						<h4>Step 1: Your Information</h4>
-						<form class="form-inline" role="form">
-							<!-- <div class="form-group">
-								<input type="text" class="form-control"  placeholder="First Name">
-								<input type="text" class="form-control"  placeholder="Last Name">
-							</div> -->
+						<%= form_for @manager,:html=>{:id=>"card_form"} do |f| %>
+						<div class="clr"></div>
+						<% if @manager.errors.any? %>
+						<ul class="alert fade in alert-error">
+							<% @manager.errors.full_messages.each do |msg| %>
+							<li>
+								<%= msg %>
+							</li>
+							<% end %>
+						</ul>
+						<% end %>
+						
+						<div class="form-group">
+							<%= f.text_field :first_name, :required => true, :placeholder=>"Enter first name",:class=>"form-control" %>
+							<%= f.text_field :last_name, :required => true, :placeholder=>"Enter last name",:class=>"form-control" %>
+						</div>
 
-							<%= f.fields_for :user do |u| %>
-							<%= u.hidden_field :stripe_token %>
-							<div class="form-group">
-								<%= u.text_field :name, :required => true, :placeholder=>"Enter name",:class=>"form-control" %>
-								
-							</div>
+						<%= f.fields_for :user do |u| %>
+						<%= u.hidden_field :stripe_token %>
+						<div class="form-group">
+							<%= u.hidden_field :name, :value => "name" %>
 
-							<div class="form-group">
-								<div class="input-group">
-									<div class="input-group-addon">
-										@
-									</div>
-									<%= u.email_field :email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">
+									@
 								</div>
+								<%= u.email_field :email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>
 							</div>
+						</div>
 
-							<div class="form-group">
-								<%= u.password_field :password, :required => true,:class=>"form-control",:placeholder=>"Password" %>
-								<%= u.password_field :password_confirmation,:class=>"form-control", :required => true,:placeholder=>" Confirm Password" %>
+						<div class="form-group">
+							<%= u.password_field :password, :required => true,:class=>"form-control",:placeholder=>"Password" %>
+							<%= u.password_field :password_confirmation,:class=>"form-control", :required => true,:placeholder=>" Confirm Password" %>
 
-							</div>
-							<div class="form-group">
+						</div>
+						<% end %>
+						<div class="form-group">
+                      
+							<label class="radio-inline">
+								<%= f.radio_button :gender, "male" %>
+								Male </label>
+							<label class="radio-inline">
+								<%= f.radio_button :gender, "female" %>
+								Female </label>
+						</div>
 
-								<label class="radio-inline">
-									<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-									Male </label>
-								<label class="radio-inline">
-									<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-									Female </label>
-							</div>
-							</form>
 					</div>
 					<div>
 						<h4>Step 2: Company Information</h4>
-						<form class="form-inline" role="form">
-							<div class="form-group">
-								<input type="text" class="form-control"  placeholder="Company">
-								<input type="email" class="form-control"  placeholder="Email">
-							</div>
 
-							<br/>
-							<div class="form-group">
+						<div class="form-group">
+							<%= f.text_field :company_name, :required => true, :placeholder=>"Enter name",:class=>"form-control" %>
+							<%= f.text_field :company_phone, :placeholder=>"Phone",:class=>"form-control" %>
+														
+						</div>
 
-								<input type="tel" class="form-control" id="exampleInputPassword2" placeholder="Phone">
-								<input type="text" class="form-control" id="exampleInputPassword2" placeholder="Login Url">
+						<br/>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">
+									@
+								</div>
+								<%= f.email_field :company_email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>
 							</div>
-							<br/>
-							<b>**Every account has its own url. This is where you and your employee go to log in</b>
-						</form>
+							
+							<!-- <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Login Url"> -->
+						</div>
+						<br/>
+						<!-- <b>**Every account has its own url. This is where you and your employee go to log in</b> -->
+
 					</div>
 
 					<div>
@@ -164,46 +141,18 @@
 
 						</div>
 
-						<form class="form-inline" role="form">
-							<div class="form-group">
-								<input type="text" class="form-control" id="card_number"  placeholder="Credit Card Number">
-								<input type="email" class="form-control" id="code"  placeholder="CVV Number">
-							</div>
-							<br/>
-							<div class="form-group">
-								<input type="text" size="2" class="form-control"  placeholder="month" id="month"/>
-								<input type="text" size="4" class="form-control"  placeholder="Year" id="year"/>
-								<!-- <input type="text" class="form-control"  placeholder="Expairy Date" id="datepicker" /> -->
-							</div>
-
-						</form>
+						<div class="form-group">
+							<input type="text" class="form-control" id="card_number"  placeholder="Credit Card Number">
+							<input type="email" class="form-control" id="code"  placeholder="CVV Number">
+						</div>
+						<br/>
+						<div class="form-group">
+							<input type="text" size="2" class="form-control"  placeholder="month" id="month"/>
+							<input type="text" size="4" class="form-control"  placeholder="Year" id="year"/>
+							<!-- <input type="text" class="form-control"  placeholder="Expairy Date" id="datepicker" /> -->
+						</div>
 
 					</div>
-					<!-- <form action="" method="POST" id="payment-form">
-					<span class="payment-errors"></span>
-
-					<div class="form-row">
-					<label> <span>Card Number</span>
-					<input type="text" size="20" data-stripe="number" id="card_number"/>
-					</label>
-					</div>
-
-					<div class="form-row">
-					<label> <span>CVC</span>
-					<input type="text" size="4" data-stripe="cvc" id="code"/>
-					</label>
-					</div>
-
-					<div class="form-row">
-					<label> <span>Expiration (MM/YYYY)</span>
-					<input type="text" size="2" data-stripe="exp-month" id="month"/>
-					</label>
-					<span> / </span>
-					<input type="text" size="4" data-stripe="exp-year" id="year"/>
-					</div>
-					</form> -->
-
-					<% end %>					
 					<%end%>
 
 				</div>

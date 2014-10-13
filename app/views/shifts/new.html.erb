@@ -1,0 +1,11 @@
+<br />
+<%=form_for @shift do |f|%>
+
+<label for="lat">Add</label>
+<%=f.text_field :address%>
+<label for="lat">lat</label>
+<%=f.text_field :latitude%>
+<label for="long">Long</label>
+<%=f.text_field :longitude%>
+<%=f.submit%>
+<%end%>

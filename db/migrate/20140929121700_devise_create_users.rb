@@ -19,7 +19,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
       t.references :manager
-      t.references :employe
+      t.references :employee
       t.string :customer_id
       t.string :last_4_digits
 
