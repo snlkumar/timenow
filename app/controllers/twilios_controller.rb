@@ -3,49 +3,38 @@ class TwiliosController < ApplicationController
   after_filter :set_header
 
   skip_before_filter :verify_authenticity_token
-  # def voice
-  # response = Twilio::TwiML::Response.new do |r|
-  # r.Say 'Hey there. Congrats on integrating Twilio into your Rails 4 app.', :voice => 'alice'
-  # r.Play 'http://linode.rabasa.com/cantina.mp3'
-  # end
-  #
-  # render_twiml response
-  # end
   def voice
-    require 'rubygems' # This line not needed for ruby > 1.8
-require 'twilio-ruby'
-# Get your Account Sid and Auth Token from twilio.com/user/account
-     account_sid = 'AC7e9a4601d4ec4d6f16ab442d203dd198'
-      auth_token = '586be52d90daa1a307ed294e14fe96f9'
-      @client = Twilio::REST::Client.new account_sid, auth_token
-      call = @client.account.calls.create(:url => "http://demo.twilio.com/docs/voice.xml",
-      :to => "+14087625968",
-       :from => "917696099799")
-puts call.to
+  response = Twilio::TwiML::Response.new do |r|
+  r.Say 'Hey there. Congrats from timenow app', :voice => 'alice'
+  r.Play 'http://linode.rabasa.com/cantina.mp3'
   end
+  
+  render_twiml response
+  end
+  
 
   BASE_URL = "http://lvh.me:3000/twilios"
 
   #
   def incoming
     # Get client by phone number
-    client_phone = params[:phone]
-    @client = Employee.find_by_phone(client_phone)
+    client_phone = params[:From]
+    @employee = Employee.find_by_phone(client_phone)
     # Welcom message.
-    # "Welcome to #{@client.first_name}'s residence."
+    # "Welcome to #{@employee.first_name}'s residence."
     # Ask agent to identy him/herself.
-    # "Please enter your code"
-    if @client.nil?
+    # "Please enter your employee code"
+    if @employee.nil?
       render :action => "no_client.xml.builder"
     else
-      @post_to = BASE_URL + "/verify?client_id=#{@client.id}"
+      @post_to = BASE_URL + "/verify?emp_id=#{@employee.id}"
       render :action => "incoming.xml.builder", :layout => false
     end
   end
 
   #
   def verify
-    @client = Employee.find(params[:client_id])
+    @client = Employee.find(params[:emp_id])
     # @agent = Agent.find_by_code(params['Digits'])
     if @client.nil?
       @post_to = BASE_URL + "/verify?client_id=#{@client.id}"
