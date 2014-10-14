@@ -1,11 +1,11 @@
 ---
-application.js: application-cc94b2a6841f2cdf487602ae37fe28b1.js
-application/index.js: application-cc94b2a6841f2cdf487602ae37fe28b1.js
-application.css: application-67bf309b4a5b9c310dd260b4f09b55df.css
-application/index.css: application-67bf309b4a5b9c310dd260b4f09b55df.css
-glyphicons-halflings-white.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
-glyphicons-halflings-white/index.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
-glyphicons-halflings.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
-glyphicons-halflings/index.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
-jquery.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
-jquery/index.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
+application.js: application.js
+application/index.js: application.js
+application.css: application.css
+application/index.css: application.css
+glyphicons-halflings-white.png: glyphicons-halflings-white.png
+glyphicons-halflings-white/index.png: glyphicons-halflings-white.png
+glyphicons-halflings.png: glyphicons-halflings.png
+glyphicons-halflings/index.png: glyphicons-halflings.png
+jquery.min.map: jquery.min.map
+jquery/index.min.map: jquery.min.map

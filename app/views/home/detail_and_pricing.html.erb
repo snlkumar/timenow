@@ -1,3 +1,26 @@
+<script type="text/javascript">
+	function calculate_price(){
+		var default_price=49
+		var manager=parseInt($("#manager_count").val());
+		var employee=parseInt($("#employee_count").val());
+		var phone=parseInt($("#phone_checkin_pm").val());
+		
+		total_user=manager+employee
+		billable_user=0
+		if (total_user>6){
+			billable_user=total_user-6			
+		}
+		phone_charge = phone*0.06
+		user_charge = billable_user*4
+		total_amount= 49+phone_charge+user_charge
+		// alert(total_amount)
+		$("#total_amount").val("$"+total_amount+"/per month")
+		
+	}
+	
+</script>
+
+
 <div class="row">
 
                 <div class="col-xs-4" style="box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.75);margin-top: 15px;margin-left: 10px;padding: 29px;">
@@ -25,29 +48,49 @@
 
                 </div>
 
-                <div class="col-xs-4" style="box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.75);margin-left: 420px;margin-top: 45px;">
+                <div class="col-xs-5" style="box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.75);margin-left: 420px;margin-top: 45px;">
                 				  	  
 			  
                   <div>
-                         <form class="form-inline" role="form">
+                         <form class="form-horizontal" role="form">
                           <div class="form-group">
-                          	<label for="manager">Enter number of Manager</label>
-                            <input type="text" class="form-control"  placeholder="First Name">                              
+                          	<label for="manager" class="col-lg-5 control-label">Enter number of Manager</label>
+                          	<div class="col-sm-7">
+                            	<input type="text" class="form-control" id="manager_count">
+                            </div>                              
                           </div>
                           
                           <div class="form-group">
-                          	<label for="manager">Enter number of Employees</label>
-                            <input type="text" class="form-control"  placeholder="First Name">                              
-                          </div><br/>
+                          	<label for="manager" class="col-lg-5 control-label">Enter number of Employees</label>
+                          	<div class="col-sm-7">
+                            	<input type="text" class="form-control" id="employee_count">
+                            </div>                              
+                          </div>
                           <div class="form-group">
-                          	<label for="manager">Enter number of Phone checkin permonth </label>
-                            <input type="text" class="form-control"  placeholder="First Name">                              
+                          	<label for="manager" class="col-lg-5  control-label">Enter number of Phone checkin permonth </label>
+                          	<div class="col-sm-7">
+                            	<input type="text" class="form-control" id="phone_checkin_pm">
+                            </div>                              
+                          </div>
+                          
+                          <div class="form-group">
+                          	<label for="manager" class="col-lg-5  control-label">Total Amount </label>
+                          	<div class="col-sm-7">
+                            	<input type="text" class="form-control" id="total_amount" readonly="true">
+                            </div>                              
                           </div>
                          
-                          <button class="btn btn-success">Calculate </button>
+                          <a href="#" class="btn btn-primary" onclick="calculate_price()">Calculate</a>
+                          
                           
                         </form>
+                        
+                        
+                        
+                        
                   </div>
+                  
+                  
                   <div>
                	
 

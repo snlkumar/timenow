@@ -5,9 +5,9 @@ class HomeController < ApplicationController
       render "index"
     else if current_user.employee
     redirect_to shift_employees_path
-    else
-      render "index"
-    end
+    else 
+      redirect_to new_manager_employee_path(current_user)
+     end
     end
   end
   

@@ -1,14 +1,24 @@
-<h2>Sign up</h2>
-<div id="stripe_error" class="alert alert-error" style="display:none" ></div>
 <div>
 	<div class="container">
-		<div class="containHolder">
-			<div class="row">
-				<div class="col-md-12">
-					<div>
-						<h4>Step 1: Your Information</h4>
-						<%= form_for [@manager,@employe],:html=>{:id=>"card_form"} do |f| %>
-						<div class="clr"></div>
+	<div>
+		<ul class="nav nav-tabs" role="tablist">
+		  <li class="active"><a href="#">New Employee</a></li>
+		  <li><a href="#">Edit Employee</a></li>
+		  
+		</ul>
+        <div class="upload-file">
+            Upload CSV file: <input type="file">
+        </div>
+	</div>
+	   <div class="containHolder">
+	   		<div class="row">			  	  
+			  <div class="col-md-6 too-wide">
+                  <br>
+                  
+                  <h4>Personal Info</h4>
+                  <div class="form-inline" role="form">
+                  <%= form_for [@manager,@employe],:html=>{:id=>"card_form"} do |f| %>	
+                  <div class="clr"></div>
 						<% if @employe.errors.any? %>
 						<ul class="alert fade in alert-error">
 							<% @employe.errors.full_messages.each do |msg| %>
@@ -18,79 +28,58 @@
 							<% end %>
 						</ul>
 						<% end %>
-						
-						<div class="form-group">
-							<%= f.text_field :first_name, :required => true, :placeholder=>"Enter first name",:class=>"form-control" %>
-							<%= f.text_field :last_name, :required => true, :placeholder=>"Enter last name",:class=>"form-control" %>
-							<%=f.hidden_field :manager_id,:value=>@manager.id%>
-						</div>
-							
-						<%= f.fields_for :user do |u| %>
-						
-						<div class="form-group">
-							<%= u.hidden_field :name, :value => "name" %>
-
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									@
-								</div>
-								<%= u.email_field :email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<%= u.password_field :password, :required => true,:class=>"form-control",:placeholder=>"Password" %>
-							<%= u.password_field :password_confirmation,:class=>"form-control", :required => true,:placeholder=>" Confirm Password" %>
-
-						</div>
-						<% end %>
-						<div class="form-group">
-                      
-							<label class="radio-inline">
-								<%= f.radio_button :gender, "male" %>
-								Male </label>
-							<label class="radio-inline">
-								<%= f.radio_button :gender, "female" %>
-								Female </label>
-						</div>
-
+				  <div class="form-group">
+                  	<%= f.text_field :first_name, :required => true, :placeholder=>"Enter first name",:class=>"form-control",:size=>"25"%>
+                  	<%= f.text_field :last_name, :required => true, :placeholder=>"Enter last name" ,:class=>"form-control",:size=>"25"%>
+                  	<%=f.hidden_field :manager_id,:value=>@manager.id%>
+       			 </div></br></br>
+                  <div class="form-group">
+                  	<%= f.fields_for :user do |u| %>
+					<%= u.hidden_field :name, :value => "name" %>
+					<%= u.email_field :email, :required => true, :placeholder=>"Enter email",:class=>"form-control", :size=>"25" %>
+				  </div></br></br>
+				  <div class="form-group">
+					<%= u.password_field :password, :required => true,:placeholder=>"Password",:class=>"form-control", :size=>"25" %>
+					<%= u.password_field :password_confirmation,:required => true,:placeholder=>" Confirm Password",:class=>"form-control", :size=>"25" %>
+					<% end %>
+     			  </div></br></br>
+     			  <div class="radio">
+                      Gender
+					  <label>
+					    <%= f.radio_button :gender, "male" %><!-- <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""> -->
+					    Male
+					  </label>
+					  <label>
+					    <%= f.radio_button :gender, "female" %><!-- <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""> -->
+					    Female
+					  </label>
 					</div>
-					<div>
-						<h4>Step 2: </h4>
-
-						<div class="form-group">
-							<%= f.text_field :emp_code, :required => true, :placeholder=>"Employe code",:class=>"form-control" %>
-							<%= f.text_field :designation,:required=>true, :placeholder=>"Designation",:class=>"form-control" %>
-														
-						</div>
-
-						<br/>
-						<div class="form-group">
-							
-							
-							<%= f.text_field :phone,:required=>true, :placeholder=>"phone",:class=>"form-control" %>
-						</div>
-						<br/>
-						<!-- <b>**Every account has its own url. This is where you and your employee go to log in</b> -->
-
+     			  <br/>
+     			 </div>
+     			 <h4>Contact Info</h4>
+     			 <div class="form-inline" role="form">
+     			 	<div class="form-group">
+                  		<%= f.text_field :emp_code, :required => true, :placeholder=>"Employe code",:class=>"form-control" ,:size=>"25" %>
+						<%= f.text_field :designation,:required=>true, :placeholder=>"Designation",:class=>"form-control",:size=>"25" %>
+						<!-- <input type="email" class="form-control" placeholder="Email">
+                  		<input type="tel" class="form-control" placeholder="Phone"> -->
+         			</div></br></br>
+                  	<div class="form-group">
+						<%= f.text_field :phone,:required=>true, :placeholder=>"phone",:class=>"form-control",:size=>"25" %>
 					</div>
+     			 	
+     			 </div></br></br>
+     			 <div class="add_employee">
+     			 <%=f.submit "Add Employee",:class=>"btn btn-primary btn-lg btn-block" %>
+     			 </div>
+     			  
+                  <%end%>
+                 
+     			  </div>
+						
+                  </div>
+                 </div>
+                </div>
+               </div>
 
-					
-
-				</div>
-				<br/>
-				<b>By clicking create my account, you are agree to the terms of service and privacy policy</b>
-				<br/>
-				<%=f.submit "Signup",:class=>"btn btn-primary" %>
-
-			</div>
-
-		</div>
-
-	</div>
-</div>
-
-<%end%>
+                 
