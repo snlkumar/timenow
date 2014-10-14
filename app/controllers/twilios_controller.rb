@@ -24,12 +24,13 @@ class TwiliosController < ApplicationController
 # puts call.to
   # end
 
-  BASE_URL = "http://lvh.me:3000/twilios"
+  BASE_URL = "http://yumengine.com/twilios"
 
   #
   def incoming
+   puts "i am incomibg#{params}"
     # Get client by phone number
-    client_phone = params[:phone]
+    client_phone = 7696099799
     @client = Employee.find_by_phone(client_phone)
     # Welcom message.
     # "Welcome to #{@client.first_name}'s residence."
