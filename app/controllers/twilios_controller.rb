@@ -5,13 +5,25 @@ class TwiliosController < ApplicationController
   skip_before_filter :verify_authenticity_token
   def voice
   response = Twilio::TwiML::Response.new do |r|
-  r.Say 'Hey there. Congrats from timenow app', :voice => 'alice'
+  r.Say 'Hey there. Congrats from timenow app.', :voice => 'alice'
   r.Play 'http://linode.rabasa.com/cantina.mp3'
   end
   
   render_twiml response
   end
-  
+  # def voice
+    # require 'rubygems' # This line not needed for ruby > 1.8
+# require 'twilio-ruby'
+# # Get your Account Sid and Auth Token from twilio.com/user/account
+     # account_sid = 'AC7e9a4601d4ec4d6f16ab442d203dd198'
+      # auth_token = '586be52d90daa1a307ed294e14fe96f9'
+      # @client = Twilio::REST::Client.new account_sid, auth_token
+      # call = @client.account.calls.create(:url => "http://demo.twilio.com/docs/voice.xml",
+      # :to => "+14087625968",
+       # :from => "917696099799")
+# puts call.to
+  # end
+
 
   BASE_URL = "http://lvh.me:3000/twilios"
 
