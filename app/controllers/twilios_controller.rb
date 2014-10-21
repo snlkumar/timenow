@@ -24,7 +24,7 @@ class TwiliosController < ApplicationController
   # puts call.to
   # end
 
-  BASE_URL = "http://115.252.32.247:3000/twilios"
+  BASE_URL = "http://115.252.40.223:3000/twilios"
 
   #
   def incoming
@@ -52,7 +52,7 @@ class TwiliosController < ApplicationController
       render :action => "no_client.xml.builder"
     return
     else if @employee.user.valid_password?("password")
-        @post_to = BASE_URL + "/employee_checkin?client_id=#{@employee.id}"
+        @post_to = BASE_URL + "/employee_checkin?emp_id=#{@employee.id}"
         render :action => "valid_password.xml.builder", :layout => false
       else
 
@@ -64,16 +64,18 @@ class TwiliosController < ApplicationController
   def employee_checkin
     @employee = Employee.find(params[:emp_id])
     
-      if params[:digit]==0
+      if params[:Digit]==0
         if @employee.checked_out?
-          r.Say 'Thanks you have checked in successfully.', :voice => 'alice'
+          @employee.shifts.create(:start_time=>Time.now.strftime("%m-%d-%Y %H:%M"))          
         else
           @message="Wrong input you are already checked in."
           render :action => "already_exist.xml.builder", :layout => false
         end
-      else if params[:digit]==1
+      else if params[:Digit]==1
           if @employee.checked_in?
-            r.Say 'Thanks you have checked out successfully.', :voice => 'alice'
+             shift_hours= Time.diff(Time.parse(Time.now.strftime("%m-%d-%Y %H:%M")), Time.parse(@employee.shifts.last.start_time))[:diff] 
+             @employee.shifts.last.update(:end_time=>Time.now.strftime("%m-%d-%Y %H:%M"),:shift_hours=>shift_hours)
+            
           else
             @message="Wrong input you are not checked in"
             render :action => "already_exist.xml.builder", :layout => false            
