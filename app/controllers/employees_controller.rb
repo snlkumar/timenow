@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
   end
   
   def create
-   
+   @manager=current_user.manager
     @employe=Employee.new params[:employee]
     if @employe.save
     redirect_to root_path(:host=>request.domain)

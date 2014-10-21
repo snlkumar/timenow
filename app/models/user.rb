@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_exclusion_of :name, in: ['www', 'mail', 'ftp'], message: 'is not available'
   attr_accessible :name,:employe,:manager, :email,:subdomain, :password, :password_confirmation,:stripe_token, :coupon, :remember_me, :created_at, :updated_at
   attr_accessor :stripe_token, :coupon
-  before_save :update_stripe,:if => Proc.new {|model| model.manager }
+  # before_save :update_stripe,:if => Proc.new {|model| model.manager }
   after_create :update_subdomain 
   before_destroy :cancel_subscription
   

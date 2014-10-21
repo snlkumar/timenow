@@ -22,6 +22,8 @@ Rails3Subdomains::Application.routes.draw do
   root :to => "home#index"
   get 'twilios/voice' => 'twilios#voice'
   get 'twilios/incoming' => 'twilios#incoming'
+  post 'twilios/employee_checkin' => 'twilios#employee_checkin'
+  post 'twilios/verify_employee' => 'twilios#verify_employee'
   # resources :twilios do
     # collection do
       # post 'incoming'
