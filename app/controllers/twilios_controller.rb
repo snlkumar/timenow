@@ -26,27 +26,27 @@ class TwiliosController < ApplicationController
 
   BASE_URL = "http://yumengine.com/twilios"
 
+
   #
   def incoming
    puts "i am incomibg#{params}"
     # Get client by phone number
     client_phone = 7696099799
     @client = Employee.find_by_phone(client_phone)
-    # Welcom message.
-    # "Welcome to #{@client.first_name}'s residence."
+    # "Welcome to #{@employee.first_name}'s residence."
     # Ask agent to identy him/herself.
-    # "Please enter your code"
-    if @client.nil?
+    # "Please enter your employee code"
+    if @employee.nil?
       render :action => "no_client.xml.builder"
     else
-      @post_to = BASE_URL + "/verify?client_id=#{@client.id}"
+      @post_to = BASE_URL + "/verify?emp_id=#{@employee.id}"
       render :action => "incoming.xml.builder", :layout => false
     end
   end
 
   #
   def verify
-    @client = Employee.find(params[:client_id])
+    @client = Employee.find(params[:emp_id])
     # @agent = Agent.find_by_code(params['Digits'])
     if @client.nil?
       @post_to = BASE_URL + "/verify?client_id=#{@client.id}"

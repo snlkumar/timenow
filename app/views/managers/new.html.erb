@@ -46,7 +46,9 @@
 		<div class="containHolder">
 			<div class="row">
 				<div class="col-md-12">
+					<div class="form-horizontal">
 					<div>
+						
 						<h4>Step 1: Your Information</h4>
 						<%= form_for @manager,:html=>{:id=>"card_form"} do |f| %>
 						<div class="clr"></div>
@@ -61,9 +63,20 @@
 						<% end %>
 						
 						<div class="form-group">
-							<%= f.text_field :first_name, :required => true, :placeholder=>"Enter first name",:class=>"form-control" %>
-							<%= f.text_field :last_name, :required => true, :placeholder=>"Enter last name",:class=>"form-control" %>
+							<label for="first_name" class="col-sm-2 control-label">First Name</label>
+							<div class="col-sm-3">
+							<%= f.text_field :first_name, :required => true, :class=>"form-control" %>
+							</div>
+							
 						</div>
+						<div class="form-group">
+							<label for="last_name" class="col-sm-2 control-label">Last Name</label>
+							<div class="col-sm-3">
+								<%= f.text_field :last_name, :required => true,:class=>"form-control" %>
+							</div>
+							
+						</div>
+						
 
 						<%= f.fields_for :user do |u| %>
 						<%= u.hidden_field :stripe_token %>
@@ -73,19 +86,26 @@
 						</div>
 
 						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									@
-								</div>
-								<%= u.email_field :email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>
+							<label for="email" class="col-sm-2 control-label">Email</label>
+							<div class="col-sm-3">
+								<%= u.email_field :email, :required => true, :class=>"form-control" %>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<%= u.password_field :password, :required => true,:class=>"form-control",:placeholder=>"Password" %>
-							<%= u.password_field :password_confirmation,:class=>"form-control", :required => true,:placeholder=>" Confirm Password" %>
-
+							<label for="password" class="col-sm-2 control-label">Password</label>
+							<div class="col-sm-3">
+								<%= u.password_field :password, :required => true,:class=>"form-control" %>
+							</div>
+	
 						</div>
+						<div class="form-group">
+							<label for="confirm_password" class="col-sm-2 control-label">Confirm Password</label>
+							<div class="col-sm-3">
+								<%= u.password_field :password_confirmation,:class=>"form-control", :required => true %>
+							</div>
+						</div>
+
 						<% end %>
 						<div class="form-group">
                       
@@ -102,18 +122,23 @@
 						<h4>Step 2: Company Information</h4>
 
 						<div class="form-group">
-							<%= f.text_field :company_name, :required => true, :placeholder=>"Enter name",:class=>"form-control" %>
-							<%= f.text_field :company_phone, :placeholder=>"Phone",:class=>"form-control" %>
-														
+							<label for="company_name" class="col-sm-2 control-label"> Name</label>
+							<div class="col-sm-3">
+								<%= f.text_field :company_name, :required => true, :class=>"form-control" %>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="company_phone" class="col-sm-2 control-label">Phone</label>
+							<div class="col-sm-3">
+								<%= f.text_field :company_phone, :class=>"form-control" %>
+							</div>
 						</div>
 
 						<br/>
 						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									@
-								</div>
-								<%= f.email_field :company_email, :required => true, :placeholder=>"Enter email",:class=>"form-control" %>
+							<label for="company_email" class="col-sm-2 control-label">Company Email</label>
+							<div class="col-sm-3">
+								<%= f.email_field :company_email, :required => true,:class=>"form-control" %>
 							</div>
 							
 							<!-- <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Login Url"> -->
@@ -131,8 +156,8 @@
 						</p>
 						<% else %>
 						<div>
-
-							<label class="radio-inline">
+						
+							<label class="radio-inline ">
 								<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
 								One Time Payment </label>
 							<label class="radio-inline">
@@ -142,19 +167,36 @@
 						</div>
 
 						<div class="form-group">
-							<input type="text" class="form-control" id="card_number"  placeholder="Credit Card Number">
-							<input type="email" class="form-control" id="code"  placeholder="CVV Number">
+							<label for="credit_card_no" class="col-sm-2 control-label">Card No.</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="card_number">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="cvv_no" class="col-sm-2 control-label">Cvv No.</label>
+							<div class="col-sm-3">
+								<input type="email" class="form-control" id="code" >
+							</div>
 						</div>
 						<br/>
 						<div class="form-group">
-							<input type="text" size="2" class="form-control"  placeholder="month" id="month"/>
-							<input type="text" size="4" class="form-control"  placeholder="Year" id="year"/>
+							<label for="month" class="col-sm-2 control-label">Month</label>
+							<div class="col-sm-3">
+								<input type="text" size="2" class="form-control" id="month"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="Year" class="col-sm-2 control-label">Year</label>
+							<div class="col-sm-3">
+								<input type="text" size="4" class="form-control" id="year"/>
+							</div>
 							<!-- <input type="text" class="form-control"  placeholder="Expairy Date" id="datepicker" /> -->
 						</div>
 
 					</div>
 					<%end%>
 
+				</div>
 				</div>
 				<br/>
 				<b>By clicking create my account, you are agree to the terms of service and privacy policy</b>
