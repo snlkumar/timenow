@@ -8,7 +8,7 @@ Rails3Subdomains::Application.configure do
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
-   config.domain = 'lvh.me'
+  config.domain = 'lvh.me'
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
