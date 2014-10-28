@@ -3,7 +3,7 @@
 
 # change top level domain size
 
-Rails3Subdomains::Application.config.session_store :cookie_store, key: '_rails3-subdomains_session',:domain => ".lvh.me"
+Rails3Subdomains::Application.config.session_store :cookie_store, key: '_rails3-subdomains_session',:domain => ".yumengine.com"
 # request.domain(2)
 # request.subdomain(2)
 # Rails.application.config.session_store :cookie_store, :key => '_rails3-subdomains_session', :domain => "lvh.me"

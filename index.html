@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>圆通快递运单</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="all" />
+    <script type="text/javascript" src="jquery.1.4.4.js"></script>
+    <script type="text/javascript">
+    $(function(){
+             function minsize(){
+                var $box=$("#diming");
+                var $content=$(".diming");
+                if($content.outerHeight() > $box.outerHeight()){
+                    $content.css('font-size',parseInt($content.css('font-size'))-1 +'px');
+                    minsize();
+                }
+            }
+            minsize();
+    });
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <img src="img/background.jpg" width="340"/>
+        <div class="comment">
+               <div class="text text1">上联: 此联由圆通快递留存</div>
+               <div class="text text2" >
+                    <img src="img/bianzhima.jpg" width="178"/>
+                    <div class="fonttop hei ">
+                        <img src="img/xing.jpg" width="8" style="left:5px;"/> 8124430104 <img src="img/xing.jpg" width="8" style="left:-10px;"/>
+                    </div>
+               </div>
+               <div class="text text3" id="diming">
+                   <div class="hei diming b">
+                        浦西
+                   </div>
+               </div>
+                <div class="text text4">收<br />件<br />人</div>
+                <div class="text text5">上海 - 上海市 - 徐汇区<br />桂林路396号1号楼106室</div>
+                <div class="text text6">邮编: 200233</div>
+                <div class="text text7">申屠晶晶&nbsp;&nbsp;&nbsp;&nbsp;电话: <span class='hei b'>13812345678</span></div>
+                <div class="text text8">详<br />细<br />内<br />容</div>
+                <div class="f8 text text9 ">订&nbsp;单&nbsp;号: C02-9375032-0726224</div>
+                <div class="f8 text text10">发货单号: Dq4gYyIYR</div>
+                <div class="f8 text text11">
+                        内容品名：一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂子一块肥皂一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂子一块肥皂一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂子一块肥皂一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂子一块肥皂一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂子一块肥皂一块毛巾一条被子一块肥皂一块毛巾一条被子一块肥皂
+                </div>
+                <div class="f8 text text12">数量: 6</div>
+                <div class="f8 text text13 ">重量: 450g</div>
+                <div class="text text14 f10 ">收件人签名</div>
+                <div class="text text15 f9 ">证件号: </div>
+                <div class="text text16 f8 ">年月日</div>
+
+                <div class="text text17 f10 ">代收人姓名 (签字) : </div>
+                <div class="text text18 f8 ">已由收件人允许代为签收</div>
+                <div class="text text19 f9 ">证件号: </div>
+                <div class="text text20 f8 ">年月日</div>
+                <div class="text text21 f10 ">
+                       圆通快递将快件送达收件人地址. 经收件人或收件人(寄件人) 允许的代收人签字,视为送达.
+                </div>
+
+                <div class="text text22 f8 hei">运单号: *8124430104*</div>
+                <div class="text text23 f8 hei">下联: 此联由收件人留存</div>
+                <div class="text text24">收<br />件<br />人</div>
+                <div class="text text25">上海 - 上海市 - 徐汇区<br />桂林路396号1号楼106室</div>
+                <div class="text text26">邮编: 200233</div>
+                <div class="text text27">张三&nbsp;&nbsp;&nbsp;&nbsp;电话: <span class='hei b'>13712345678</span></div>
+                <div class="text text28">详<br />细<br />内<br />容</div>
+                <div class="f9 text text29 ">订&nbsp;单&nbsp;号: C02-9375032-0726224</div>
+                <div class="f9 text text30 ">发&nbsp;件&nbsp;人: 本草堂旗舰店</div>
+                <div class="f9 text text31 ">发货地址: 上海 - 上海市 - 徐汇区<br />桂林路396号1号楼106室</div>
+                <div class="f9 text text32 ">电话: <span class="hei b">13712345678</span></div>
+                <div class="f9 text text33 ">
+                        此运单仅供圆通快递签约客户使用，相关责任义务以双方合作合同为准。
+                </div>
+        </div>
+    </div>
+</body>
+</html>
