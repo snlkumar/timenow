@@ -17,7 +17,14 @@ class EmployeesController < ApplicationController
   end
   
   def shift
-    
+    @total_time = Time.now.change(:hour => 00 , :minute => 00, :second => 00)
+    puts "the total time is #{@total_time}"
+    @employee = current_user.employee
+    @shifts = @employee.shifts.where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day)
+    @shifts.each do |shift|
+      
+    end
+    @total_time.strftime("%H:%M")
   end
   
 end

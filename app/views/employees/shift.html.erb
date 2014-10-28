@@ -4,7 +4,7 @@
 		$("#check_out").hide();
 	})
 	$(document).on("click","#check_in",function(){
-		$("#stopwatch").stopwatch().stopwatch('start');
+		// $("#stopwatch").stopwatch().stopwatch('start');
 		var emp_id=$(this).attr("employee_id");
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(success, error);
@@ -103,7 +103,7 @@ $(document).on("click","#check_out",function(){
 
 	<div class="col-xs-8" style="box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);margin-top: 15px;margin-left: 218px;padding: 29px;">
 		<div style="position:relative;float:right;font-size: 20px;">
-			<b><span id="stopwatch">00:00:00</span></b>
+			<b><span id="stopwatch"><%=@total_time%></span></b>
 		</div>
 		<p>
 			<input type='button' value='Check-in' employee_id="<%=current_user.employee.id%>" id="check_in" class="btn btn-primary"/>

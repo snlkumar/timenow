@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20141009091257) do
     t.string   "start_time"
     t.string   "end_time"
     t.string   "date"
-    t.string   "shift_hours"
+    t.time     "shift_hours"
     t.string   "address"
     t.float    "longitude"
     t.string   "status"

@@ -49,7 +49,8 @@ class ShiftsController < ApplicationController
     end_time=Time.now.strftime("%d-%m-%Y %H:%M")
     puts "jhkhkhk#{end_time}"
     shift_hours= Time.diff(Time.parse(end_time), Time.parse(start_time))[:diff] 
-    puts "i am   #{shift_hours}" 
+    puts "i am   #{shift_hours}"
+    puts "shift hours in integer#{Time.parse(shift_hours)}" 
     respond_to do |format|
       if @shift.update_attributes(:end_time=>end_time,:shift_hours=>shift_hours,:status=>"checked_out")
         format.json{
