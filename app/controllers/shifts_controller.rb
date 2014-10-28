@@ -20,8 +20,8 @@ class ShiftsController < ApplicationController
     @shift=Shift.new(params[:shift])
     timezone = Timezone::Zone.new :latlon => [@shift.latitude,@shift.longitude]
     Time.zone=timezone.zone
-    @shift.start_time=Time.now.strftime("%m-%d-%Y %H:%M")
-    @shift.date=Time.now.strftime("%m/%d/%Y")
+    @shift.start_time=Time.now.strftime("%d-%m-%Y %H:%M")
+    @shift.date=Time.now.strftime("%d/%m/%Y")
     respond_to do |format|
       if @shift.save
         format.json{
@@ -44,12 +44,14 @@ class ShiftsController < ApplicationController
     @shift=Shift.find params[:id]
     timezone = Timezone::Zone.new :latlon => [@shift.latitude,@shift.longitude]
     Time.zone=timezone.zone
-    end_time=Time.now.strftime("%m-%d-%Y %H:%M")
+    start_time = @shift.start_time
+    puts "the start time is #{start_time}"
+    end_time=Time.now.strftime("%d-%m-%Y %H:%M")
     puts "jhkhkhk#{end_time}"
-    shift_hours= Time.diff(Time.parse(end_time), Time.parse(@shift.start_time))[:diff] 
+    shift_hours= Time.diff(Time.parse(end_time), Time.parse(start_time))[:diff] 
     puts "i am   #{shift_hours}" 
     respond_to do |format|
-      if @shift.update_attributes(:end_time=>end_time,:shift_hours=>shift_hours)
+      if @shift.update_attributes(:end_time=>end_time,:shift_hours=>shift_hours,:status=>"checked_out")
         format.json{
           render :json => {:valid=>"true",:id=>@shift.id}
         }

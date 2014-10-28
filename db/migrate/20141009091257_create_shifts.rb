@@ -9,6 +9,7 @@ class CreateShifts < ActiveRecord::Migration
       t.string :shift_hours
       t.string :address
       t.float :longitude
+      t.string :status
       t.timestamps
     end
   end
