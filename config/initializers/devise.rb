@@ -9,7 +9,7 @@ Devise.setup do |config|
 
   # Configure the class responsible to send e-mails.
    config.mailer = "Devise::Mailer"
-   ActionMailer::Base.default_url_options = { :host => 'lvh.me:3000' }
+#   ActionMailer::Base.default_url_options = { :host => 'lvh.me:3000' }
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
