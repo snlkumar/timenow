@@ -1,8 +1,5 @@
 <script type="text/javascript" src="../assets/jquery.timer.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#check_out").hide();
-	})
+<script type="text/javascript">	
 	$(document).on("click","#check_in",function(){
 		// $("#stopwatch").stopwatch().stopwatch('start');
 		var emp_id=$(this).attr("employee_id");
@@ -24,7 +21,7 @@
 				'shift[employee_id]': emp_id,
 				'shift[start_time]':"",
 				'shift[date]':"",
-				'shift[status]':"checked in"
+				'shift[status]':"checked_in"
 				
 			}			
 			$("#ip").html(lati);
@@ -35,9 +32,7 @@
 				dataType: datatype,
 				data: processData,
 				success: function(data){
-					$("#check_out").attr("shift_id",data.id)
-					$("#check_in").hide();
-					$("#check_out").show();				
+					location.reload();									
 				},
 				error: function(e){
 					alert("fail")
@@ -81,9 +76,8 @@ $(document).on("click","#check_out",function(){
 				dataType: datatype,
 				data: processData,
 				success: function(data){
-					$("#check_out").attr("shift_id","")
-					$("#check_out").hide();
-					$("#check_in").show();				
+					location.reload();
+								
 				},
 				error: function(e){
 					alert("fail")
@@ -103,11 +97,16 @@ $(document).on("click","#check_out",function(){
 
 	<div class="col-xs-8" style="box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);margin-top: 15px;margin-left: 218px;padding: 29px;">
 		<div style="position:relative;float:right;font-size: 20px;">
-			<b><span id="stopwatch"><%=@total_time%></span></b>
+			<%if !@employee.shifts.blank? &&  @employee.shifts.last.status=="checked_in"%>
+			<b><span id="stopwatch"><%=@employee.shifts.last.start_time%></span></b>
+			<%end%>
 		</div>
 		<p>
+			<%if @employee.shifts.blank? ||  @employee.shifts.last.status=="checked_out"%>
 			<input type='button' value='Check-in' employee_id="<%=current_user.employee.id%>" id="check_in" class="btn btn-primary"/>
-			<input type='button' value='Check-out' id="check_out" shift_id="" class="btn btn-primary" onclick='stop();' />
+			<%else%>
+			<input type='button' value='Check-out' id="check_out" shift_id="<%=@employee.shifts.last.id%>" class="btn btn-primary"  />
+			<%end%>
 		</p>
 
 		<p>

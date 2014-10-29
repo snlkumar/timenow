@@ -18,8 +18,8 @@ class ShiftsController < ApplicationController
     end
 
     @shift=Shift.new(params[:shift])
-    timezone = Timezone::Zone.new :latlon => [@shift.latitude,@shift.longitude]
-    Time.zone=timezone.zone
+    # timezone = Timezone::Zone.new :latlon => [@shift.latitude,@shift.longitude]
+    # Time.zone=timezone.zone
     @shift.start_time=Time.now.strftime("%d-%m-%Y %H:%M")
     @shift.date=Time.now.strftime("%d/%m/%Y")
     respond_to do |format|
@@ -42,8 +42,8 @@ class ShiftsController < ApplicationController
     end
 
     @shift=Shift.find params[:id]
-    timezone = Timezone::Zone.new :latlon => [@shift.latitude,@shift.longitude]
-    Time.zone=timezone.zone
+    # timezone = Timezone::Zone.new :latlon => [@shift.latitude,@shift.longitude]
+    # Time.zone=timezone.zone
     start_time = @shift.start_time
     puts "the start time is #{start_time}"
     end_time=Time.now.strftime("%d-%m-%Y %H:%M")
